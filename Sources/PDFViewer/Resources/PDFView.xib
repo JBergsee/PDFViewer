@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PDFViewController" customModule="PDFViewer_Demo" customModuleProvider="target">
+            <connections>
+                <outlet property="pdfView" destination="qdZ-70-JcP" id="0Fl-jP-HFs"/>
+                <outlet property="thumbnailView" destination="IMQ-FU-6Eh" id="wf3-OU-9Zj"/>
+                <outlet property="thumbnailViewLeadingEdgeConstraint" destination="QuM-sw-aUW" id="ZO1-3i-sE8"/>
+                <outlet property="view" destination="uLf-Dd-KSv" id="iz7-ej-hh6"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="uLf-Dd-KSv">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdZ-70-JcP" customClass="PDFView">
+                    <rect key="frame" x="0.0" y="88" width="334" height="774"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IMQ-FU-6Eh" customClass="PDFThumbnailView">
+                    <rect key="frame" x="334" y="88" width="80" height="774"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="bBi-Ic-sNR">
+                            <variation key="heightClass=regular-widthClass=compact" constant="80"/>
+                        </constraint>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="n9w-PY-u5P"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="qdZ-70-JcP" firstAttribute="top" secondItem="n9w-PY-u5P" secondAttribute="top" id="LRU-ui-nKs"/>
+                <constraint firstItem="IMQ-FU-6Eh" firstAttribute="leading" secondItem="n9w-PY-u5P" secondAttribute="trailing" constant="-120" id="QuM-sw-aUW">
+                    <variation key="heightClass=regular-widthClass=compact" constant="-80"/>
+                </constraint>
+                <constraint firstItem="IMQ-FU-6Eh" firstAttribute="leading" secondItem="qdZ-70-JcP" secondAttribute="trailing" id="X7i-si-Ltg"/>
+                <constraint firstItem="IMQ-FU-6Eh" firstAttribute="top" secondItem="n9w-PY-u5P" secondAttribute="top" id="fRY-Kd-hlx"/>
+                <constraint firstItem="n9w-PY-u5P" firstAttribute="bottom" secondItem="qdZ-70-JcP" secondAttribute="bottom" id="hhH-9P-4d1"/>
+                <constraint firstItem="n9w-PY-u5P" firstAttribute="bottom" secondItem="IMQ-FU-6Eh" secondAttribute="bottom" id="hhx-SN-tuN"/>
+                <constraint firstItem="qdZ-70-JcP" firstAttribute="leading" secondItem="n9w-PY-u5P" secondAttribute="leading" id="kbH-Td-hum"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <point key="canvasLocation" x="228" y="-550"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
