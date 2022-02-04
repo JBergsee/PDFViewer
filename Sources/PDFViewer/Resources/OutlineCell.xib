@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OutlineCell" customModule="PDFViewer"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="OutlineCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="OutlineCell" id="htB-uy-COJ" customClass="OutlineCell" customModule="PDFViewer">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="htB-uy-COJ" id="LuX-Ph-SF4">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="OpenButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wU-xK-sd4">
+                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="mgp-ph-Y9G"/>
+                            <constraint firstAttribute="height" constant="44" id="wG5-0v-NXC"/>
+                        </constraints>
+                        <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                        <state key="normal">
+                            <imageReference key="image" image="chevron.right" catalog="system" symbolScale="default"/>
+                        </state>
+                        <connections>
+                            <action selector="openButtonClick:" destination="htB-uy-COJ" eventType="touchUpInside" id="dIY-RO-viB"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zmw-IT-G49">
+                        <rect key="frame" x="44" y="0.0" width="224" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="hp9-9j-n2W"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="page" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Fe-o0-82X">
+                        <rect key="frame" x="268" y="0.0" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="xFq-aH-xi1"/>
+                            <constraint firstAttribute="height" constant="44" id="zW0-0W-gEx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="0wU-xK-sd4" firstAttribute="leading" secondItem="LuX-Ph-SF4" secondAttribute="leading" id="9Vc-4H-jWE"/>
+                    <constraint firstItem="0Fe-o0-82X" firstAttribute="leading" secondItem="Zmw-IT-G49" secondAttribute="trailing" id="Mpu-TE-wUQ"/>
+                    <constraint firstItem="Zmw-IT-G49" firstAttribute="centerY" secondItem="0wU-xK-sd4" secondAttribute="centerY" id="RLr-g1-pBX"/>
+                    <constraint firstItem="Zmw-IT-G49" firstAttribute="leading" secondItem="0wU-xK-sd4" secondAttribute="trailing" id="RyZ-rQ-Yv5"/>
+                    <constraint firstItem="0wU-xK-sd4" firstAttribute="top" secondItem="LuX-Ph-SF4" secondAttribute="top" id="Zzq-vF-O5d"/>
+                    <constraint firstAttribute="trailing" secondItem="0Fe-o0-82X" secondAttribute="trailing" constant="8" id="iQu-tT-bHI"/>
+                    <constraint firstItem="0Fe-o0-82X" firstAttribute="centerY" secondItem="0wU-xK-sd4" secondAttribute="centerY" id="t09-yJ-nhS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="leftOffset" destination="9Vc-4H-jWE" id="MYy-fh-W8T"/>
+                <outlet property="openButton" destination="0wU-xK-sd4" id="W3x-Q1-zhh"/>
+                <outlet property="pageLabel" destination="0Fe-o0-82X" id="De9-q7-mxo"/>
+                <outlet property="titleLabel" destination="Zmw-IT-G49" id="Gaj-dS-Vpt"/>
+            </connections>
+            <point key="canvasLocation" x="131" y="108"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
+    </resources>
+</document>
