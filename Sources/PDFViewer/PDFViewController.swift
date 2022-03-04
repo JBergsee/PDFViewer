@@ -60,7 +60,7 @@ public class PDFViewController: UIViewController {
             let thumbnailButton = UIBarButtonItem(image: UIImage.init(systemName: "sidebar.right"), style: .plain, target: self, action: #selector(toggleThumbnails))
             
             self.navigationItem.setRightBarButton(thumbnailButton, animated: false)
-
+            
         }
         
         if (showPrint) {
@@ -68,6 +68,14 @@ public class PDFViewController: UIViewController {
             let printButton = UIBarButtonItem(image: UIImage.init(systemName: "printer"), style: .plain, target: self, action: #selector(airprint))
             var barButtonItems = self.navigationItem.rightBarButtonItems
             barButtonItems?.append(printButton)
+            self.navigationItem.setRightBarButtonItems(barButtonItems, animated: false)
+        }
+        
+        //Outline button
+        if (showOutline) {
+            outlineButton = UIBarButtonItem(image: UIImage.init(systemName: "list.triangle"), style: .plain, target: self, action: #selector(showOutlineTable))
+            var barButtonItems = self.navigationItem.rightBarButtonItems
+            barButtonItems?.append(outlineButton!)
             self.navigationItem.setRightBarButtonItems(barButtonItems, animated: false)
         }
         
@@ -101,10 +109,17 @@ public class PDFViewController: UIViewController {
         
         //Outline button
         if (showOutline && self.outline != nil) {
-            outlineButton = UIBarButtonItem(image: UIImage.init(systemName: "list.triangle"), style: .plain, target: self, action: #selector(showOutlineTable))
+            //Get the buttons
             var barButtonItems = self.navigationItem.rightBarButtonItems
-            barButtonItems?.append(outlineButton!)
-            self.navigationItem.setRightBarButtonItems(barButtonItems, animated: false)
+            if (outlineButton != nil && barButtonItems!.contains(outlineButton!)) {
+                //The button exists and is in the menu
+                //Nothing more to do.
+            } else {
+                //Create it and add to the navbar
+                outlineButton = UIBarButtonItem(image: UIImage.init(systemName: "list.triangle"), style: .plain, target: self, action: #selector(showOutlineTable))
+                barButtonItems?.append(outlineButton!)
+                self.navigationItem.setRightBarButtonItems(barButtonItems, animated: false)
+            }
         }
     }
     
