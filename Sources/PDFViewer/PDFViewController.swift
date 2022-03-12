@@ -24,6 +24,9 @@ public class PDFViewController: UIViewController {
     @IBOutlet private var thumbnailViewLeadingEdgeConstraint: NSLayoutConstraint!
     
     private var outline: PDFOutline?
+    
+    private var thumbnailButton: UIBarButtonItem?
+    private var printButton: UIBarButtonItem?
     private var outlineButton: UIBarButtonItem?
     
     public convenience init() {
@@ -57,26 +60,18 @@ public class PDFViewController: UIViewController {
             thumbnailView.backgroundColor = UIColor.clear //secondarySystemBackground
             
             //Button to show thumbnails
-            let thumbnailButton = UIBarButtonItem(image: UIImage.init(systemName: "sidebar.right"), style: .plain, target: self, action: #selector(toggleThumbnails))
-            
-            self.navigationItem.setRightBarButton(thumbnailButton, animated: false)
-            
+            thumbnailButton = UIBarButtonItem(image: UIImage.init(systemName: "sidebar.right"), style: .plain, target: self, action: #selector(toggleThumbnails))
         }
         
         if (showPrint) {
             //Print button
-            let printButton = UIBarButtonItem(image: UIImage.init(systemName: "printer"), style: .plain, target: self, action: #selector(airprint))
-            var barButtonItems = self.navigationItem.rightBarButtonItems
-            barButtonItems?.append(printButton)
-            self.navigationItem.setRightBarButtonItems(barButtonItems, animated: false)
+            printButton = UIBarButtonItem(image: UIImage.init(systemName: "printer"), style: .plain, target: self, action: #selector(airprint))
+
         }
         
         //Outline button
         if (showOutline) {
             outlineButton = UIBarButtonItem(image: UIImage.init(systemName: "list.triangle"), style: .plain, target: self, action: #selector(showOutlineTable))
-            var barButtonItems = self.navigationItem.rightBarButtonItems
-            barButtonItems?.append(outlineButton!)
-            self.navigationItem.setRightBarButtonItems(barButtonItems, animated: false)
         }
         
     }
@@ -102,38 +97,52 @@ public class PDFViewController: UIViewController {
             
             self.present(alert, animated: true, completion: nil)
             
+            //remove all buttons
+            self.navigationItem.rightBarButtonItems = nil
+            
+            //remove thumbnail view
+            switchOnThumbnails(false)
+            
         } else {
-            self.outline = self.pdfDocument!.outlineRoot
             self.pdfView.document = self.pdfDocument
-        }
-        
-        //Outline button
-        if (showOutline && self.outline != nil) {
-            //Get the buttons
-            var barButtonItems = self.navigationItem.rightBarButtonItems
-            if (outlineButton != nil && barButtonItems!.contains(outlineButton!)) {
-                //The button exists and is in the menu
-                //Nothing more to do.
-            } else {
-                //Create it and add to the navbar
-                outlineButton = UIBarButtonItem(image: UIImage.init(systemName: "list.triangle"), style: .plain, target: self, action: #selector(showOutlineTable))
-                barButtonItems?.append(outlineButton!)
-                self.navigationItem.setRightBarButtonItems(barButtonItems, animated: false)
+            self.outline = self.pdfDocument!.outlineRoot
+            
+            //Add or remove buttons
+            var applicableButtons:[UIBarButtonItem] = []
+            
+            if (showThumbnails) {
+                applicableButtons.append(thumbnailButton!)
             }
+            
+            if (showPrint) {
+                applicableButtons.append(printButton!)
+            }
+            
+            //Outline button
+            if (showOutline && self.outline != nil) {
+                applicableButtons.append(outlineButton!)
+            }
+            
+            self.navigationItem.rightBarButtonItems = applicableButtons
         }
     }
     
     
     @IBAction private func toggleThumbnails() {
+        let isShowing = self.thumbnailViewLeadingEdgeConstraint.constant < 0;
+        switchOnThumbnails(!isShowing)
         
+    }
+    
+    private func switchOnThumbnails(_ show:Bool) {
         let thumbnailViewWidth = self.thumbnailView.frame.size.width;
         let screenWidth = UIScreen.main.bounds.size.width;
         let multiplier = thumbnailViewWidth / (screenWidth - thumbnailViewWidth) + 1.0;
-        let isShowing = self.thumbnailViewLeadingEdgeConstraint.constant < 0;
+        
         let scaleFactor = self.pdfView.scaleFactor;
         UIView.animate(withDuration: 0.5) {
-            self.thumbnailViewLeadingEdgeConstraint.constant = isShowing ? 0 : -thumbnailViewWidth
-            self.pdfView.scaleFactor = isShowing ? scaleFactor * multiplier : scaleFactor / multiplier
+            self.thumbnailViewLeadingEdgeConstraint.constant = show ? -thumbnailViewWidth : 0
+            self.pdfView.scaleFactor = show ? scaleFactor / multiplier : scaleFactor * multiplier
             self.view.layoutIfNeeded()
         }
     }
